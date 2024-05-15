@@ -261,15 +261,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         </>
       ) : (
         // to get socket.io on same page
-        <Box d="flex" alignItems="center" justifyContent="center" h="100%">
-          <Lottie
-            // options={defaultOptions}
-            animationData={illustration}
-            loop={true}
-            autoplay={true}
-            // style={{width:"50px", marginBottom: 15, marginLeft: 0 }}
-          />
-          <Text fontSize="3xl" pb={3} fontFamily="Work sans" textAlign="center">
+        <Box
+          d="flex"
+          alignItems="center"
+          justifyContent="center"
+          h="100%"
+           
+          zIndex={9}
+      
+          backdropBlur={90}
+        >
+          <Lottie animationData={illustration} loop={true} autoplay={true} />
+          <Text fontSize="4xl" pb={3} color={"var(--white)"} textAlign="center">
             Click on a chat to start chatting
           </Text>
         </Box>

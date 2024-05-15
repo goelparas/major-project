@@ -24,8 +24,7 @@ export const loginUser = async (email, password) => {
     localStorage.setItem("userInfo", JSON.stringify(data));
     return data;
   } catch (error) {
-    toast.error(error.data.message || "Please check your credentials");
-    throw error;
+    toast.error(error?.data?.message || "Please check your credentials");
   }
 };
 
@@ -46,7 +45,7 @@ export const signupUser = async (username, email, password) => {
     return data;
   } catch (error) {
     toast.error(error?.data?.message ?? "Please check your credentials");
-    throw error;
+     
   }
 };
 

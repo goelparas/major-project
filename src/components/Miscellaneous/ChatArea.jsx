@@ -12,10 +12,13 @@ const ChatArea = ({ fetchAgain, setFetchAgain }) => {
       alignItems="center"
       flexDir="column"
       p={3}
-      bg="black"
+      backgroundColor="rgba( 1, 1, 1 ,.4)"
+      backdropBlur={"blur(20px) saturate(180%)"}
+      boxShadow={"dark-lg"}
       w={{ base: "100%" }}
-      borderRadius="lg"
-      borderWidth="1px"
+      borderRadius="2xl"
+      border={"1px"}
+      borderColor={"black"}
       zIndex={10}
     >
       <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />

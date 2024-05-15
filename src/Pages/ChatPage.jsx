@@ -9,25 +9,24 @@ const ChatPage = () => {
   const { user } = ChatState();
   const [fetchAgain, setFetchAgain] = useState(false);
   return (
-    <ChakraProvider>
-      <div className="w-full border-2 border-white z-10">
-        {user && <SideDrawer />}
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          w="100%"
-          h="91vh"
-          p="10px"
-        >
-          {user && (
-            <>
+    <div className=" border-2 border-white z-10 h-screen w-screen">
+      {user ? (
+        <div className="flex flex-col gap-10">
+          <SideDrawer />
+          <Box
+            className="flex w-screen gap-10 justify-between h-screen"
+            height={"85vh"}
+            bg={"transparent"}
+            marginX={50}
+          >
+            <ChakraProvider>
               <MyChats fetchAgain={fetchAgain} />
               <ChatArea fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
-            </>
-          )}
-        </Box>
-      </div>
-    </ChakraProvider>
+            </ChakraProvider>
+          </Box>
+        </div>
+      ) : null}
+    </div>
   );
 };
 

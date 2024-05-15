@@ -92,7 +92,7 @@ const Login = () => {
           onClick={submitHandler}
           disabled={loading}
         >
-          {loading ? "Logging ... " : "Login"}
+          {loading ? "Logging ... ": "Login"}
         </button>
       </div>
     </div>

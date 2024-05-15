@@ -34,6 +34,7 @@ import { ChatState } from "../../Context/ChatProvider";
 // import { ChatState } from "../../Context/ChatProvider";
 import { useNavigate } from "react-router-dom";
 import { fetchData } from "../../api/apiservice";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const SideDrawer = () => {
   const {
@@ -111,16 +112,20 @@ const SideDrawer = () => {
     }
   };
   return (
-    <>
+    <ChakraProvider>
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="#a5e166"
-        w="100%"
-        p="5px 10px 5px 10px"
-        borderWidth="5px"
-        zIndex={9999}
+        bg="linear-gradient(346deg, rgba(255,255,255,0) 0%, rgba(165,224,103,1) 46%)"
+        w="95%"
+        borderColor={"black"}
+        marginX={"auto"}
+        p="10px"
+        marginTop={5}
+        backdropFilter={"blur(20px) brightness(120%) contrast(100%)"}
+        rounded={50}
+        zIndex={99}
       >
         <Tooltip label="Search Users" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
@@ -130,14 +135,12 @@ const SideDrawer = () => {
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Work sans">
-          CodeChat
+        <Text fontSize="3xl" fontFamily={".livvic-regular "}>
+          Code Chat
         </Text>
-        <div>
+        <Box zIndex={99}>
           <Menu>
-            <MenuButton p={1}>
-              <BellIcon fontSize="2xl" m={1} />
-            </MenuButton>
+            
             <MenuList pl={2}>
               {!notification.length && "No Notifications"}
               {notification.map((notify) => (
@@ -156,23 +159,20 @@ const SideDrawer = () => {
             </MenuList>
           </Menu>
           <Menu>
-            <MenuButton as={Button} bg="#a5e166" _hover={{ bg: "#a5e166" }}>
+            <MenuButton as={Button} bg="transparent" _hover={{ bg: "transparent" }} boxShadow={"dark-lg"} rounded={9999}  appearance={"none"}>
               <Avatar
-                size="sm"
+                as={Button}
+                size="xl"
                 cursor="pointer"
-                name={user.name}
-                src={user.dp}
+                name={user.username}
+                src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.username}`}
               />
             </MenuButton>
             <MenuList>
-              <ProfileModal user={user}>
-                <MenuItem>My Profile</MenuItem>{" "}
-              </ProfileModal>
-              <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
           </Menu>
-        </div>
+        </Box>
       </Box>
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
@@ -205,7 +205,7 @@ const SideDrawer = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </>
+    </ChakraProvider>
   );
 };
 
