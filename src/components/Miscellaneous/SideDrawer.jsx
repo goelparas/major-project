@@ -120,6 +120,7 @@ const SideDrawer = () => {
         w="100%"
         p="5px 10px 5px 10px"
         borderWidth="5px"
+        zIndex={9999}
       >
         <Tooltip label="Search Users" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
