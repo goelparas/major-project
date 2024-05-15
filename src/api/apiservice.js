@@ -7,6 +7,8 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const customFetch = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });
+
+ 
 export const loginUser = async (email, password) => {
   try {
     const config = {
@@ -49,13 +51,13 @@ export const signupUser = async (username, email, password) => {
 };
 
 export const fetchChats = async (user) => {
+  const config  = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  }
   try {
-    const config = {
-      headers: {
-        authToken: user.token,
-      },
-    };
-
+    
     const { data } = await axios.get(`${BASE_URL}/api/chat`, config);
     return data;
   } catch (error) {
@@ -68,17 +70,15 @@ export const createGroupChat = async (
   selectedUsers,
   authToken
 ) => {
-  const config = {
-    headers: {
-      authToken,
-    },
-  };
-
   const requestData = {
     name: groupChatName,
     users: JSON.stringify(selectedUsers.map((u) => u._id)),
   };
-
+  const config  = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  }
   const { data } = await customFetch.post(
     `/api/chat/group`,
     requestData,
@@ -88,12 +88,6 @@ export const createGroupChat = async (
 };
 
 export const fetchData = async (userId, authToken) => {
-  const config = {
-    headers: {
-      authToken,
-    },
-  };
-
   try {
     const response = await customFetch.post("/api/chat", { userId }, config);
     return response.data;
@@ -104,13 +98,12 @@ export const fetchData = async (userId, authToken) => {
 };
 
 export const singleChat = async (authToken, obj) => {
-  const config = {
-    headers: {
-      authToken,
-    },
-  };
-
   try {
+    const config  = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    }
     const response = await customFetch.post("/api/chat", { userId }, config);
     return response.data;
   } catch (error) {

@@ -169,6 +169,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             display="flex"
             justifyContent={{ base: "space-between" }}
             alignItems="center"
+            zIndex={999}
           >
             <IconButton
               display={{ base: "flex", md: "none" }}
@@ -204,6 +205,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             h="100%"
             borderRadius="lg"
             overflowY="hidden"
+            zIndex={999}
           >
             {loading ? (
               <Spinner

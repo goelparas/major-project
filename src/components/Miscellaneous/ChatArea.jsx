@@ -16,6 +16,7 @@ const ChatArea = ({ fetchAgain, setFetchAgain }) => {
       w={{ base: "100%" }}
       borderRadius="lg"
       borderWidth="1px"
+      zIndex={10}
     >
       <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
     </Box>

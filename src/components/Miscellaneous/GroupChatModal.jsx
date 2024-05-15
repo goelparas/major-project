@@ -55,7 +55,7 @@ const GroupChatModal = ({ children }) => {
       setLoading(true);
       const config = {
         headers: {
-          authToken: user.token,
+          "Authorization": `Bearer ${user.token}`,
         },
       };
       const { data } = await axios.get(
@@ -107,9 +107,9 @@ const GroupChatModal = ({ children }) => {
     <>
       <span onClick={onOpen}>{children}</span>
 
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal onClose={onClose} isOpen={isOpen} isCentered  >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent zIndex={999}>
           <ModalHeader
             fontSize="35px"
             fontFamily="Work sans"
