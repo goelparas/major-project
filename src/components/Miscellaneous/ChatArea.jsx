@@ -12,9 +12,9 @@ const ChatArea = ({ fetchAgain, setFetchAgain }) => {
       alignItems="center"
       flexDir="column"
       p={3}
-      backgroundColor="rgba( 1, 1, 1 ,.4)"
-      backdropBlur={"blur(20px) saturate(180%)"}
-      boxShadow={"dark-lg"}
+      background="linear-gradient(35deg, rgba(248,243,242,0.7) 2%, rgba(248,243,242,1) 80%)"
+      backdropBlur={"20px"}
+    
       w={{ base: "100%" }}
       borderRadius="2xl"
       border={"1px"}

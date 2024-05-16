@@ -95,7 +95,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     setNewMessage("");
     const data = await singleChat(user.token, {
       content: ciphertext,
-      chatId: selectedChat,
+      chatId: selectedChat?._id,
     });
     if (data) {
       socket.emit("new message", data);
@@ -165,7 +165,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             pb={3}
             px={2}
             w="100%"
-            fontFamily="Work sans"
+            fontFamily="Livvic"
+            fontWeight={700}
             display="flex"
             justifyContent={{ base: "space-between" }}
             alignItems="center"
@@ -186,7 +187,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 </>
               ) : (
                 <>
-                  {selectedChat.chatName.toUpperCase()}
+                  {selectedChat?.chatName?.toUpperCase()}
                   <UpdateGroupChatModal
                     fetchMessages={fetchMessages}
                     fetchAgain={fetchAgain}
@@ -200,10 +201,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            bg="#D4F6CC"
+            
             w="100%"
             h="100%"
-            borderRadius="lg"
+            backdropBlur={"20px"}
+            borderRadius="2xl"
             overflowY="hidden"
             zIndex={999}
           >
@@ -226,15 +228,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               id="first-name"
               isRequired
               mt={3}
+              position={"relative"}
             >
               {istyping ? (
-                <div>
+                <div className="absolute -top-10 left-0">
                   <Lottie
-                    // options={defaultOptions}
                     animationData={animationData}
                     loop={true}
                     autoplay={true}
-                    style={{ width: "50px", marginBottom: 15, marginLeft: 0 }}
+                    style={{ width: "50px", marginBottom: 35, marginLeft: 0 }}
                   />
                 </div>
               ) : (
@@ -244,32 +246,39 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
+                gap={10}
+                backdropBlur={"blur(10px)"}
+                background={"transparent"}
               >
                 <Input
                   variant="filled"
                   bg="white"
-                  placeholder="Enter a message.."
+                  placeholder="Whispher Something"
                   value={newMessage}
+                  shadow={"md"}
+                  rounded={20}
+                  background={"#E2E1F4"}
+                  border={"1px"} 
+                  outline={"none"}
                   onChange={typingHandler}
+                  p={7}
                 />
-                <Button bg="#FF9933" onClick={sendMessageViaButton}>
-                  <i className="fa fa-paper-plane" aria-hidden="true"></i>
+                <Button p={7} border={"1px"}  background={"#E2E1F4"} onClick={sendMessageViaButton} rounded={20} shadow={"md"}>
+                   Hit Me
                 </Button>
               </Box>
             </FormControl>
           </Box>
         </>
       ) : (
-        // to get socket.io on same page
+       
         <Box
           d="flex"
           alignItems="center"
           justifyContent="center"
           h="100%"
-           
           zIndex={9}
-      
-          backdropBlur={90}
+          backdropBlur={"90px"}
         >
           <Lottie animationData={illustration} loop={true} autoplay={true} />
           <Text fontSize="4xl" pb={3} color={"var(--white)"} textAlign="center">

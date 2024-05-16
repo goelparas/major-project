@@ -11,11 +11,12 @@ import {
   useDisclosure,
   FormControl,
   Input,
-  useToast,
+   
   Box,
   IconButton,
   Spinner,
 } from "@chakra-ui/react";
+import { toast } from "sonner";
 import axios from "axios";
 import { useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
@@ -29,7 +30,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [renameloading, setRenameLoading] = useState(false);
-  const toast = useToast();
+ 
 
   const { selectedChat, setSelectedChat, user } = ChatState();
 
@@ -50,7 +51,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         `${BASE_URL}/api/user?search=${search}`,
         config
       );
-       
+
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -183,7 +184,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `/api/chat/removeGroup`,
+        `${import.meta.env.VITE_BASE_URL}/api/chat/removeGroup`,
         {
           chatId: selectedChat._id,
           userId: removeuser._id,
@@ -222,7 +223,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         <ModalContent>
           <ModalHeader
             fontSize="35px"
-            fontFamily="Work sans"
+            fontFamily="Livvic"
             display="flex"
             justifyContent="center"
           >
@@ -250,9 +251,10 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
               />
               <Button
                 variant="solid"
-                colorScheme="green"
+                bg="#a5e166"
                 ml={1}
                 isLoading={renameloading}
+                color={"white"}
                 onClick={handleRename}
               >
                 Update
@@ -279,7 +281,11 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => handleRemove(user)} colorScheme="red">
+            <Button
+              onClick={() => handleRemove(user)}
+              bg={"#f25757"}
+              color={"white"}
+            >
               Leave Group
             </Button>
           </ModalFooter>

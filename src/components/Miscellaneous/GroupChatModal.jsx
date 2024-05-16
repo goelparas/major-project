@@ -11,6 +11,7 @@ import {
   FormControl,
   Input,
   Box,
+  Spinner,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -55,7 +56,7 @@ const GroupChatModal = ({ children }) => {
       setLoading(true);
       const config = {
         headers: {
-          "Authorization": `Bearer ${user.token}`,
+          authToken: user.token,
         },
       };
       const { data } = await axios.get(
@@ -83,13 +84,7 @@ const GroupChatModal = ({ children }) => {
 
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
-      toast({
-        title: "Please fill all the fields",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
+      toast.error("Please fill all the fields");
       return;
     }
 
@@ -107,14 +102,16 @@ const GroupChatModal = ({ children }) => {
     <>
       <span onClick={onOpen}>{children}</span>
 
-      <Modal onClose={onClose} isOpen={isOpen} isCentered  >
+      <Modal onClose={onClose} isOpen={isOpen} isCentered >
         <ModalOverlay />
         <ModalContent zIndex={999}>
           <ModalHeader
             fontSize="35px"
-            fontFamily="Work sans"
+            fontFamily="Livvic"
             display="flex"
             justifyContent="center"
+            
+            
           >
             Create Group
           </ModalHeader>
@@ -144,7 +141,7 @@ const GroupChatModal = ({ children }) => {
               ))}
             </Box>
             {loading ? (
-              <div>Loading...</div>
+              <Spinner m={20} />
             ) : (
               searchResult
                 ?.slice(0, 4)
@@ -158,7 +155,7 @@ const GroupChatModal = ({ children }) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleSubmit} colorScheme="green">
+            <Button onClick={handleSubmit} background={"#a5e166"}>
               Create Group
             </Button>
           </ModalFooter>

@@ -1,4 +1,4 @@
-import { ChatIcon } from "@chakra-ui/icons";
+import { AddIcon, ChatIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import { Box, Stack, Text } from "@chakra-ui/layout";
 
 import { useEffect, useState } from "react";
@@ -41,7 +41,7 @@ const MyChats = ({ fetchAgain }) => {
       alignItems="center"
       gap={10}
       p={5}
-      bg="white"
+      bg="linear-gradient(345deg, rgba(248,243,242,1) 16%, rgba(248,243,242,0.33519345238095233) 75%)"
       w={{ base: "100%", md: "30%" }}
       borderRadius="lg"
       zIndex={9}
@@ -56,14 +56,18 @@ const MyChats = ({ fetchAgain }) => {
         justifyContent="center"
         alignItems="center"
       >
-        
         <GroupChatModal>
           <Button
             display="flex"
             fontSize={{ base: "17px", md: "10px", lg: "20px" }}
-            rightIcon={<ChatIcon />}
+            background={"#EFDBD1"}
+            shadow={"md"}
+            rounded={20}
+            px={"50px"}
+            py={"30px"}
+            
           >
-            Create Group
+            New Group
           </Button>
         </GroupChatModal>
       </Box>
@@ -75,20 +79,30 @@ const MyChats = ({ fetchAgain }) => {
         w="100%"
         h="100%"
         borderRadius="lg"
+        roundedTop={30}
         overflowY="hidden"
+        
+
       >
         {chats ? (
-          <Stack overflowY="scroll">
+          <Stack overflowY="scroll"  css={{
+            '&::-webkit-scrollbar': {
+              width: '0px',
+            },
+      
+          }}>
             {chats.map((chat) => (
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bg={selectedChat === chat ? "#a5e166" : "#b9e788"}
+                bg={selectedChat === chat ? "#a5e166" : "#E2E1F4"}
+                border={selectedChat === chat ? "1px" : ""}
+                borderColor={"black"}
+                shadow={selectedChat === chat ? "md" : ""}
                 color={selectedChat === chat ? "white" : "black"}
                 px={3}
                 py={2}
                 display="flex"
-                 
                 borderRadius="xl"
                 key={chat._id}
               >
@@ -113,7 +127,7 @@ const MyChats = ({ fetchAgain }) => {
                       ? getSender(loggedUser, chat.users)
                       : chat.chatName}
                   </Text>
-                  {chat.latestMessage && (
+                  {/* {chat.latestMessage && (
                     <Text fontSize="xs">
                       <b>
                         {chat.latestMessage.sender._id === user._id
@@ -128,7 +142,7 @@ const MyChats = ({ fetchAgain }) => {
                           ) + "..."
                         : decryptMessage(chat.latestMessage.content)}
                     </Text>
-                  )}
+                  )} */}
                 </Box>
               </Box>
             ))}

@@ -8,7 +8,6 @@ const customFetch = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });
 
- 
 export const loginUser = async (email, password) => {
   try {
     const config = {
@@ -45,18 +44,16 @@ export const signupUser = async (username, email, password) => {
     return data;
   } catch (error) {
     toast.error(error?.data?.message ?? "Please check your credentials");
-     
   }
 };
 
 export const fetchChats = async (user) => {
-  const config  = {
+  const config = {
     headers: {
-      Authorization: `Bearer ${user.token}`,
+      authToken: user.token,
     },
-  }
+  };
   try {
-    
     const { data } = await axios.get(`${BASE_URL}/api/chat`, config);
     return data;
   } catch (error) {
@@ -69,21 +66,26 @@ export const createGroupChat = async (
   selectedUsers,
   authToken
 ) => {
-  const requestData = {
-    name: groupChatName,
-    users: JSON.stringify(selectedUsers.map((u) => u._id)),
-  };
-  const config  = {
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-    },
+  try {
+    const requestData = {
+      name: groupChatName,
+      users: JSON.stringify(selectedUsers.map((u) => u._id)),
+    };
+    const config = {
+      headers: {
+        authToken: authToken,
+      },
+    };
+    const { data } = await customFetch.post(
+      `/api/chat/group`,
+      requestData,
+      config
+    );
+    return data;
+  } catch (error) {
+    console.log(error)
+    toast.error(error?.response.data?.message || "Something went wrong");
   }
-  const { data } = await customFetch.post(
-    `/api/chat/group`,
-    requestData,
-    config
-  );
-  return data;
 };
 
 export const fetchData = async (userId, authToken) => {
@@ -98,12 +100,12 @@ export const fetchData = async (userId, authToken) => {
 
 export const singleChat = async (authToken, obj) => {
   try {
-    const config  = {
+    const config = {
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        authToken: authToken,
       },
-    }
-    const response = await customFetch.post("/api/chat", { userId }, config);
+    };
+    const response = await customFetch.post("/api/message", { ...obj }, config);
     return response.data;
   } catch (error) {
     toast.error(error.response.data.message || "Something went wrong!");

@@ -4,6 +4,7 @@
 :root{
     --white:#F8F3F2;
     --neon:"#a5e166";
+    --purple:"#E2E1F4";
 }
 
 body {
@@ -11,6 +12,7 @@ body {
   font-family: "Livvic", sans-serif;
   font-weight: 500;
   font-style: normal;
+  overflow:hidden;
 }
 
 h1,

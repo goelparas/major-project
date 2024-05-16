@@ -26,7 +26,7 @@ const ProfileModal = ({ user, children }) => {
         <IconButton display={{ base: "flex" }} icon={ <Avatar
                 size="sm"
                 cursor="pointer"
-                name={user.name}
+                name={user.username}
                 src={user.dp}
               />} onClick={onOpen} />
       )}
@@ -35,7 +35,7 @@ const ProfileModal = ({ user, children }) => {
         <ModalContent h="410px">
           <ModalHeader
             fontSize="40px"
-            fontFamily="Work sans"
+            fontFamily="Livvic"
             display="flex"
             justifyContent="center"
           >
@@ -52,17 +52,17 @@ const ProfileModal = ({ user, children }) => {
               borderRadius="full"
               boxSize="150px"
               src={user.dp}
-              alt={user.name}
+              alt={user.username}
             />
              <Text
               fontSize={{ base: "28px", md: "30px" }}
-              fontFamily="Work sans"
+              fontFamily="Livvic"
             >
               Username: {user.username}
             </Text>
             <Text
               fontSize={{ base: "28px", md: "30px" }}
-              fontFamily="Work sans"
+              fontFamily="Livvic"
             >
               Email: {user.email}
             </Text>

@@ -117,30 +117,31 @@ const SideDrawer = () => {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="linear-gradient(346deg, rgba(255,255,255,0) 0%, rgba(165,224,103,1) 46%)"
+        bg="#E2E1F4"
         w="95%"
         borderColor={"black"}
         marginX={"auto"}
+        shadow={"xl"}
         p="10px"
         marginTop={5}
-        backdropFilter={"blur(20px) brightness(120%) contrast(100%)"}
-        rounded={50}
+        backdropBlur={"20px"}
+        rounded={25}
+        border={"2px"}
         zIndex={99}
       >
         <Tooltip label="Search Users" hasArrow placement="bottom-end">
-          <Button variant="ghost" onClick={onOpen}>
-            <SearchIcon />
-            <Text display={{ base: "none", md: "flex" }} px={4}>
-              Search Users
-            </Text>
+          <Button bg={"transparent"} onClick={onOpen}  _hover={{ bg: "transparent" }}>
+            <SearchIcon  fontSize={"2xl"}/>
           </Button>
         </Tooltip>
-        <Text fontSize="3xl" fontFamily={".livvic-regular "}>
+        <Text
+          fontSize={"3xl"}
+          fontFamily={".livvic-bold"}
+        >
           Code Chat
         </Text>
         <Box zIndex={99}>
           <Menu>
-            
             <MenuList pl={2}>
               {!notification.length && "No Notifications"}
               {notification.map((notify) => (
@@ -159,7 +160,14 @@ const SideDrawer = () => {
             </MenuList>
           </Menu>
           <Menu>
-            <MenuButton as={Button} bg="transparent" _hover={{ bg: "transparent" }} boxShadow={"dark-lg"} rounded={9999}  appearance={"none"}>
+            <MenuButton
+              as={Button}
+              bg="transparent"
+              shadow={"none"}
+              _hover={{ bg: "transparent", border: 0, shadow: "none" }}
+              boxShadow={"none"}
+              rounded={9999}
+            >
               <Avatar
                 as={Button}
                 size="xl"
