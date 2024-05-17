@@ -1,6 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
 import { ChatState } from "../../Context/ChatProvider";
 import { loginUser } from "../../api/apiservice";

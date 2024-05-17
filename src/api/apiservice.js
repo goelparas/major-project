@@ -6,6 +6,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 // Set a base URL using an Axios interceptor
 const customFetch = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
+   
 });
 
 export const loginUser = async (email, password) => {
@@ -83,7 +84,7 @@ export const createGroupChat = async (
     );
     return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     toast.error(error?.response.data?.message || "Something went wrong");
   }
 };

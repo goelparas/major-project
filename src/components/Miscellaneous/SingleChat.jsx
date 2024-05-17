@@ -17,6 +17,7 @@ import io from "socket.io-client";
 import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import { ChatState } from "../../Context/ChatProvider";
 import { singleChat } from "../../api/apiservice";
+import EditorButton from "./EditorButton";
 const ENDPOINT = import.meta.env.VITE_BASE_URL;
 const SECRET_KEY = "0mzt3amdht5cstbhmr7hmdktr@s";
 var socket, selectedChatCompare;
@@ -177,6 +178,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               icon={<ArrowBackIcon />}
               onClick={() => setSelectedChat("")}
             />
+
             {messages &&
               (!selectedChat.isGroupChat ? (
                 <>
@@ -188,11 +190,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               ) : (
                 <>
                   {selectedChat?.chatName?.toUpperCase()}
-                  <UpdateGroupChatModal
-                    fetchMessages={fetchMessages}
-                    fetchAgain={fetchAgain}
-                    setFetchAgain={setFetchAgain}
-                  />
+                  <div className="flex items-center justify-between gap-10">
+                    <EditorButton />
+                    <UpdateGroupChatModal
+                      fetchMessages={fetchMessages}
+                      fetchAgain={fetchAgain}
+                      setFetchAgain={setFetchAgain}
+                    />
+                  </div>
                 </>
               ))}
           </Text>
@@ -201,7 +206,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            
             w="100%"
             h="100%"
             backdropBlur={"20px"}
@@ -258,20 +262,26 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   shadow={"md"}
                   rounded={20}
                   background={"#E2E1F4"}
-                  border={"1px"} 
+                  border={"1px"}
                   outline={"none"}
                   onChange={typingHandler}
                   p={7}
                 />
-                <Button p={7} border={"1px"}  background={"#E2E1F4"} onClick={sendMessageViaButton} rounded={20} shadow={"md"}>
-                   Hit Me
+                <Button
+                  p={7}
+                  border={"1px"}
+                  background={"#E2E1F4"}
+                  onClick={sendMessageViaButton}
+                  rounded={20}
+                  shadow={"md"}
+                >
+                  Hit Me
                 </Button>
               </Box>
             </FormControl>
           </Box>
         </>
       ) : (
-       
         <Box
           d="flex"
           alignItems="center"

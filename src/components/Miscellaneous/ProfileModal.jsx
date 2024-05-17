@@ -26,9 +26,10 @@ const ProfileModal = ({ user, children }) => {
         <IconButton display={{ base: "flex" }} icon={ <Avatar
                 size="sm"
                 cursor="pointer"
-                name={user.username}
+            name={user.username}
                 src={user.dp}
               />} onClick={onOpen} />
+              
       )}
       <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
